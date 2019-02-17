@@ -1,0 +1,103 @@
+<script type="text/javascript">
+    //全局变量
+    var GV = {
+        ROOT: "__ROOT__/",
+        WEB_ROOT: "__WEB_ROOT__/",
+        JS_ROOT: "static/js/",
+        APP: '{$Request.module}'/*当前应用名*/
+    };
+</script>
+<script src="/global/vendor/jquery/jquery.js"></script>
+<script src="https://cdn.mofyi.com/font-awesome/5.0.13/js/fontawesome-all.min.js"></script>
+<script src="https://cdn.mofyi.com/echarts/4.0.2/echarts.min.js"></script>
+<script src="https://cdn.mofyi.com/clipboard/1.7.1/clipboard.min.js"></script>
+<script src="https://cdn.mofyi.com/plugins/bootstrap-sweetalert/1.0.1/sweetalert.min.js"></script>
+<script src="__STATIC__/js/wind.js"></script>
+<script>
+    highlight_subnav('{$url_now|default=""}');
+    // 导航展开、高亮
+    function highlight_subnav(url){
+        $('.site-menu').find('a[href="' + url + '"]').parent().addClass('active');
+        $('.site-menu').find('a[href="' + url + '"]').parents('.site-menu-item').addClass('active');
+        $('.site-menu').find('a[href="' + url + '"]').parents('.site-menu-item').addClass('open');
+    }
+</script>
+<script>
+    Wind.css('artDialog');
+    Wind.css('layer');
+    $(function () {
+        $("[data-toggle='tooltip']").tooltip({
+            container:'body',
+            html:true,
+        });
+        $("li.dropdown").hover(function () {
+            $(this).addClass("open");
+        }, function () {
+            $(this).removeClass("open");
+        });
+    });
+
+    function jump(url,msg = '')
+    {
+        if(msg !=='' )
+        {
+            alert(msg);
+        }
+        window.location.href = url;
+    }
+</script>
+<if condition="APP_DEBUG">
+    <style>
+        #think_page_trace_open {
+            z-index: 9999;
+        }
+    </style>
+</if>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<!-- Core  -->
+<script src="/global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
+<script src="/global/vendor/popper-js/umd/popper.min.js"></script>
+<script src="/global/vendor/bootstrap/bootstrap.js"></script>
+<script src="/global/vendor/animsition/animsition.js"></script>
+<script src="/global/vendor/mousewheel/jquery.mousewheel.js"></script>
+<script src="/global/vendor/asscrollbar/jquery-asScrollbar.js"></script>
+<script src="/global/vendor/asscrollable/jquery-asScrollable.js"></script>
+<script src="/global/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
+
+<!-- Plugins -->
+<script src="/global/vendor/switchery/switchery.js"></script>
+<script src="/global/vendor/intro-js/intro.js"></script>
+<script src="/global/vendor/screenfull/screenfull.js"></script>
+<script src="/global/vendor/slidepanel/jquery-slidePanel.js"></script>
+
+<!-- Scripts -->
+<script src="/global/js/Component.js"></script>
+<script src="/global/js/Plugin.js"></script>
+<script src="/global/js/Base.js"></script>
+<script src="/global/js/Config.js"></script>
+
+<script src="/remark/js/Section/Menubar.js"></script>
+<script src="/remark/js/Section/GridMenu.js"></script>
+<script src="/remark/js/Section/Sidebar.js"></script>
+<script src="/remark/js/Section/PageAside.js"></script>
+<script src="/remark/js/Plugin/menu.js"></script>
+
+<script src="/global/js/config/colors.js"></script>
+<script src="/remark/js/config/tour.js"></script>
+<script>Config.set('remark', '../../remark');</script>
+
+<!-- Page -->
+<script src="/remark/js/Site.js"></script>
+<script src="/global/js/Plugin/asscrollable.js"></script>
+<script src="/global/js/Plugin/slidepanel.js"></script>
+<script src="/global/js/Plugin/switchery.js"></script>
+
+<script>
+    (function(document, window, $){
+        'use strict';
+        var Site = window.Site;
+        $(document).ready(function(){
+            Site.run();
+        });
+    })(document, window, jQuery);
+</script>

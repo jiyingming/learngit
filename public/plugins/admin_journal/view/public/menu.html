@@ -1,0 +1,161 @@
+
+<php>
+// 顶级菜单
+function getsubmenu(){
+    $submenus = admin_menu();
+    if (!empty($submenus)) {
+        foreach($submenus as $menu){
+            $menu_name=lang($menu['lang']);
+            $menu_name=$menu['lang']==$menu_name?$menu['name']:$menu_name;
+            if(empty($menu['items'])){
+</php>
+        <li class="site-menu-item">
+            <a href="{$menu.url}">
+                <i class="{$menu.icon|default='desktop'} site-menu-icon"></i>
+                <span class="site-menu-title"> {$menu_name} </span>
+            </a>
+            <php>}else{</php>
+        <li class="site-menu-item has-sub">
+            <a href="javascript:void(0);" class="">
+                <i class="{$menu.icon|default='desktop'} normal site-menu-icon wb-layout" aria-hidden="true"></i>
+                <span class="site-menu-title"> {$menu_name} </span>
+                <span class="site-menu-arrow"></span>
+            </a>
+
+            <ul class="site-menu-sub">
+                <php>getsubmenu1($menu['items'])</php>
+            </ul>
+            <php>}</php>
+        </li>
+<php>
+            }
+        }
+    }
+</php>
+
+<php>
+    // 子级菜单
+    function getsubmenu1($submenus){
+    foreach($submenus as $menu){
+        $menu_name=lang($menu['lang']);
+        $menu_name=$menu['lang']==$menu_name?$menu['name']:$menu_name;
+        if(empty($menu['items'])){
+</php>
+    <li class="site-menu-item">
+        <a href="{$menu.url}">
+            <span class="site-menu-title"> {$menu_name} </span>
+        </a>
+        <php>}else{</php>
+    <li class="site-menu-item has-sub">
+        <a href="javascript:void(0);" class="">
+            <span class="site-menu-title"> {$menu_name} </span>
+            <span class="site-menu-arrow"></span>
+        </a>
+        <ul class="site-menu-sub">
+            <php>getsubmenu1($menu['items'])</php>
+        </ul>
+        <php>}</php>
+    </li>
+<php>
+        }
+    }
+</php>
+
+<if condition="APP_DEBUG">
+    <style>
+        #think_page_trace_open {
+            left: 0 !important;
+            right: initial !important;
+        }
+    </style>
+</if>
+
+<div class="menu-lt">
+    <div class="site-menubar">
+        <div class="site-menubar-body" >
+            <div>
+                <div>
+                    <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                        <a class="btn btn-sm btn-warning" href="__ROOT__/"
+                           title="{:lang('WEBSITE_HOME_PAGE')}"
+                           target="_blank"
+                           data-toggle="tooltip">
+                            <i class="fas fa-home"></i>
+                        </a>
+
+                        <if condition="cmf_auth_check(cmf_get_current_admin_id(),'user/AdminAsset/index')">
+                            <a class="btn btn-sm btn-info"
+                               href="/user/AdminAsset/index"
+                               title="资源管理"
+                               data-toggle="tooltip">
+                                <i class="fas fa-file"></i>
+                            </a>
+                        </if>
+
+                        <if condition="cmf_auth_check(cmf_get_current_admin_id(),'admin/Setting/clearcache')">
+                            <a class="btn btn-sm btn-danger"
+                               href="/admin/Setting/clearcache"
+                               title="{:lang('ADMIN_SETTING_CLEARCACHE')}"
+                               data-toggle="tooltip">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+                        </if>
+
+                        <if condition="cmf_auth_check(cmf_get_current_admin_id(),'admin/RecycleBin/index')">
+                            <a class="btn btn-sm btn-danger"
+                               href="/admin/RecycleBin/index"
+                               title="回收站"
+                               data-toggle="tooltip">
+                                <i class="fas fa-recycle"></i>
+                            </a>
+                        </if>
+
+                        <if condition="APP_DEBUG">
+                            <a class="btn btn-sm btn-default"
+                               href="/admin/Menu/index"
+                               title="{:lang('ADMIN_MENU_INDEX')}"
+                               data-toggle="tooltip">
+                                <i class="fas fa-list-ol"></i>
+                            </a>
+                        </if>
+
+                    </div>
+                    <ul class="site-menu" data-plugin="menu">
+                        {:getsubmenu()}
+                        <!-- <li class="site-menu-item has-sub active open">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
+                                <span class="site-menu-title">Layouts</span>
+                                <span class="site-menu-arrow"></span>
+                            </a>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item">
+                                    <a class="animsition-link" href="../layouts/bordered-header.html">
+                                        <span class="site-menu-title">Bordered Header</span>
+                                    </a>
+                                </li>
+                                <li class="site-menu-item has-sub">
+                                    <a href="javascript:void(0)">
+                                        <span class="site-menu-title">Page Aside</span>
+                                        <div class="site-menu-label">
+                                            <span class="badge badge-danger badge-round mr-25">new</span>
+                                        </div>
+                                        <span class="site-menu-arrow"></span>
+                                    </a>
+                                    <ul class="site-menu-sub">
+                                        <li class="site-menu-item">
+                                            <a class="animsition-link" href="../layouts/aside-left-static.html">
+                                                <span class="site-menu-title">Left Static</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
